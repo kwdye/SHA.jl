@@ -6,11 +6,11 @@ export sha2_224, sha2_256, sha2_384, sha2_512
 export sha3_224, sha3_256, sha3_384, sha3_512
 export SHA224_CTX, SHA256_CTX, SHA384_CTX, SHA512_CTX
 export SHA2_224_CTX, SHA2_256_CTX, SHA2_384_CTX, SHA2_512_CTX
-export SHA3_224_CTX, SHA3_256_CTX, SHA3_384_CTX, SHA3_512_CTX
+export SHA3_224_CTX, SHA3_256_CTX, SHA3_256_KECCAK_CTX, SHA3_384_CTX, SHA3_512_CTX
 export HMAC_CTX, hmac_sha1
 export hmac_sha224, hmac_sha256, hmac_sha384, hmac_sha512
 export hmac_sha2_224, hmac_sha2_256, hmac_sha2_384, hmac_sha2_512
-export hmac_sha3_224, hmac_sha3_256, hmac_sha3_384, hmac_sha3_512
+export hmac_sha3_224, hmac_sha3_256, hmac_sha3_256_keccak, hmac_sha3_384, hmac_sha3_512
 
 # data to be hashed:
 const AbstractBytes = Union{AbstractVector{UInt8},NTuple{N,UInt8} where N}
