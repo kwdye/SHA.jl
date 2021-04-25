@@ -59,6 +59,12 @@ mutable struct SHA3_256_CTX <: SHA3_CTX
     buffer::Array{UInt8,1}
     bc::Array{UInt64,1}
 end
+mutable struct SHA3_256_KECCAK_CTX <: SHA3_CTX
+    state::Array{UInt64,1}
+    bytecount::UInt128
+    buffer::Array{UInt8,1}
+    bc::Array{UInt64,1}
+end
 mutable struct SHA3_384_CTX <: SHA3_CTX
     state::Array{UInt64,1}
     bytecount::UInt128
@@ -80,6 +86,7 @@ digestlen(::Type{SHA2_224_CTX}) = 28
 digestlen(::Type{SHA3_224_CTX}) = 28
 digestlen(::Type{SHA2_256_CTX}) = 32
 digestlen(::Type{SHA3_256_CTX}) = 32
+digestlen(::Type{SHA3_256_KECCAK_CTX}) = 32
 digestlen(::Type{SHA2_384_CTX}) = 48
 digestlen(::Type{SHA3_384_CTX}) = 48
 digestlen(::Type{SHA2_512_CTX}) = 64
@@ -102,6 +109,7 @@ blocklen(::Type{SHA2_512_CTX}) = UInt64(128)
 
 blocklen(::Type{SHA3_224_CTX}) = UInt64(25*8 - 2*digestlen(SHA3_224_CTX))
 blocklen(::Type{SHA3_256_CTX}) = UInt64(25*8 - 2*digestlen(SHA3_256_CTX))
+blocklen(::Type{SHA3_256_KECCAK_CTX}) = UInt64(25*8 - 2*digestlen(SHA3_256_KECCAK_CTX))
 blocklen(::Type{SHA3_384_CTX}) = UInt64(25*8 - 2*digestlen(SHA3_384_CTX))
 blocklen(::Type{SHA3_512_CTX}) = UInt64(25*8 - 2*digestlen(SHA3_512_CTX))
 
@@ -117,6 +125,7 @@ SHA2_512_CTX() = SHA2_512_CTX(copy(SHA2_512_initial_hash_value), 0, zeros(UInt8,
 
 SHA3_224_CTX() = SHA3_224_CTX(zeros(UInt64, 25), 0, zeros(UInt8, blocklen(SHA3_224_CTX)), Vector{UInt64}(undef, 5))
 SHA3_256_CTX() = SHA3_256_CTX(zeros(UInt64, 25), 0, zeros(UInt8, blocklen(SHA3_256_CTX)), Vector{UInt64}(undef, 5))
+SHA3_256_KECCAK_CTX() = SHA3_256_KECCAK_CTX(zeros(UInt64, 25), 0, zeros(UInt8, blocklen(SHA3_256_KECCAK_CTX)), Vector{UInt64}(undef, 5))
 SHA3_384_CTX() = SHA3_384_CTX(zeros(UInt64, 25), 0, zeros(UInt8, blocklen(SHA3_384_CTX)), Vector{UInt64}(undef, 5))
 SHA3_512_CTX() = SHA3_512_CTX(zeros(UInt64, 25), 0, zeros(UInt8, blocklen(SHA3_512_CTX)), Vector{UInt64}(undef, 5))
 
@@ -145,6 +154,7 @@ show(io::IO, ::SHA2_384_CTX) = write(io, "SHA2 384-bit hash state")
 show(io::IO, ::SHA2_512_CTX) = write(io, "SHA2 512-bit hash state")
 show(io::IO, ::SHA3_224_CTX) = write(io, "SHA3 224-bit hash state")
 show(io::IO, ::SHA3_256_CTX) = write(io, "SHA3 256-bit hash state")
+show(io::IO, ::SHA3_256_KECCAK_CTX) = write(io, "SHA3 256-bit KECCAK hash state")
 show(io::IO, ::SHA3_384_CTX) = write(io, "SHA3 384-bit hash state")
 show(io::IO, ::SHA3_512_CTX) = write(io, "SHA3 512-bit hash state")
 

@@ -51,22 +51,30 @@ function transform!(context::T) where {T<:SHA3_CTX}
     return context.state
 end
 
-
-
 # Finalize data in the buffer, append total bitlength, and return our precious hash!
 function digest!(context::T) where {T<:SHA3_CTX}
+    return digest_impl!(context, 0x06)
+end
+
+# The original Keccak implementation of SHA3 which is used by Ethereum.
+# The only difference is the byte used for padding.
+function digest!(context::SHA3_256_KECCAK_CTX)
+    return digest_impl!(context, 0x01)
+end
+
+function digest_impl!(context::T, padding_byte) where {T<:SHA3_CTX}
     usedspace = context.bytecount % blocklen(T)
     # If we have anything in the buffer still, pad and transform that data
     if usedspace < blocklen(T) - 1
-        # Begin padding with a 0x06
-        context.buffer[usedspace+1] = 0x06
+        # Begin padding with the padding byte (0x06 unless Keccak)
+        context.buffer[usedspace+1] = padding_byte
         # Fill with zeros up until the last byte
         context.buffer[usedspace+2:end-1] .= 0x00
         # Finish it off with a 0x80
         context.buffer[end] = 0x80
     else
         # Otherwise, we have to add on a whole new buffer just for the zeros and 0x80
-        context.buffer[end] = 0x06
+        context.buffer[end] = padding_byte
         transform!(context)
 
         context.buffer[1:end-1] .= 0x0
