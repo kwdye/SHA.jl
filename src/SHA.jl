@@ -3,7 +3,7 @@ module SHA
 export sha1, SHA1_CTX, update!, digest!
 export sha224, sha256, sha384, sha512
 export sha2_224, sha2_256, sha2_384, sha2_512
-export sha3_224, sha3_256, sha3_384, sha3_512
+export sha3_224, sha3_256_keccak, sha3_384, sha3_512
 export SHA224_CTX, SHA256_CTX, SHA384_CTX, SHA512_CTX
 export SHA2_224_CTX, SHA2_256_CTX, SHA2_384_CTX, SHA2_512_CTX
 export SHA3_224_CTX, SHA3_256_CTX, SHA3_256_KECCAK_CTX, SHA3_384_CTX, SHA3_512_CTX

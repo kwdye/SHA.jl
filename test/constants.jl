@@ -13,13 +13,13 @@ sha_types = Dict(sha1 => SHA.SHA1_CTX,
             sha3_224 => SHA.SHA3_224_CTX, sha3_256 => SHA.SHA3_256_CTX, sha3_384 => SHA.SHA3_384_CTX, sha3_512 => SHA.SHA3_512_CTX)
 sha_funcs = [sha1,
              sha2_224, sha2_256, sha2_384, sha2_512,
-             sha3_224, sha3_256, sha3_384, sha3_512]
+             sha3_224, sha3_256, sha3_256_keccak, sha3_384, sha3_512]
 ctxs = [SHA1_CTX,
         SHA2_224_CTX, SHA2_256_CTX, SHA2_384_CTX, SHA2_512_CTX,
-        SHA3_224_CTX, SHA3_256_CTX, SHA3_384_CTX, SHA3_512_CTX]
+        SHA3_224_CTX, SHA3_256_CTX, SHA3_256_KECCAK_CTX, SHA3_384_CTX, SHA3_512_CTX]
 shws = ["SHA1 hash state",
         "SHA2 224-bit hash state", "SHA2 256-bit hash state", "SHA2 384-bit hash state", "SHA2 512-bit hash state",
-        "SHA3 224-bit hash state", "SHA3 256-bit hash state", "SHA3 384-bit hash state", "SHA3 512-bit hash state"]
+        "SHA3 224-bit hash state", "SHA3 256-bit hash state", "SHA3 256-bit Keccak hash state", "SHA3 384-bit hash state", "SHA3 512-bit hash state"]
 
 answers = Dict(
     sha1 => [
@@ -77,6 +77,14 @@ answers = Dict(
         "5d53469f20fef4f8eab52b88044ede69c77a6a68a60728609fc4a65ff531e7d0",
         "5c8875ae474a3634ba4fd55ec85bffd661f32aca75c6d699d0cdcb6c115891c1",
         "5c8875ae474a3634ba4fd55ec85bffd661f32aca75c6d699d0cdcb6c115891c1",
+    ],
+    sha3_256_keccak => [
+        "c5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470",
+        "9c22ff5f21f0b81b113e63f7db6da94fedef11b2119b4088b89664fb9a3cb658",
+        "8be0cf2df33d17ca1e2d9ab02c8bfbb051f44e6abb80c3e06ab55aa3661b6efd",
+        "c5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470",
+        "fadae6b49f129bbb812be8407b7b2894f34aecf6dbd1f9b0f0c7e9853098fc96",
+        "fadae6b49f129bbb812be8407b7b2894f34aecf6dbd1f9b0f0c7e9853098fc96",
     ],
     sha3_384 => [
         "0c63a75b845e4f7d01107d852e4c2485c51a50aaaa94fc61995e71bbee983a2ac3713831264adb47fb6bd1e058d5f004",
